@@ -2,14 +2,14 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>NFC Floppy Hub — GitHub Universe 2026</title>
-  <!-- Tailwind CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Pablo Avila • Aspiring SWE Portfolio</title>
+  <link rel="icon" type="image/x-icon" href="./favicon.ico" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -18,716 +18,433 @@
           fontFamily: {
             sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            darkBg: '#030303',
-            darkCard: '#0E0E10',
-            darkCardHover: '#151518',
-            darkBorder: '#1E1E22',
-            darkIconBg: '#17171B',
-            lightBg: '#F7F7F9',
-            lightCard: '#FFFFFF',
-            lightCardHover: '#F2F2F6',
-            lightBorder: '#ECECEF',
-            lightIconBg: '#F4F4F6',
           }
         }
       }
     }
   </script>
+
   <style>
     * {
+      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
       overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    /* Cosmic ambient backdrop matching the reference presentation */
-    .cosmic-backdrop {
-      background: 
-        radial-gradient(circle at 82% 88%, rgba(255, 195, 170, 0.45) 0%, rgba(190, 120, 175, 0.25) 28%, rgba(55, 45, 95, 0.35) 55%, rgba(8, 8, 12, 1) 85%),
-        radial-gradient(circle at 20% 80%, rgba(95, 65, 135, 0.3) 0%, transparent 50%),
-        #07070A;
+
+    /* Pure Solid Backdrops on Both Mobile & Desktop */
+    body.theme-dark {
+      background-color: #000000;
     }
-    /* Subtle star dust on cosmic background */
-    .cosmic-stars {
-      background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 60px 60px, 110px 110px;
-      background-position: 0 0, 30px 30px;
+    body.theme-light {
+      background-color: #F6F6F8;
     }
-    /* iPhone 15 Pro Hardware Frame */
-    .iphone-frame {
-      width: 375px;
-      height: 780px;
-      border-radius: 54px;
-      padding: 11px;
-      background: linear-gradient(145deg, #c2c2c7 0%, #76767d 35%, #505056 65%, #a5a5ad 100%);
-      box-shadow: 
-        0 35px 70px -15px rgba(0, 0, 0, 0.65),
-        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-      position: relative;
-      flex-shrink: 0;
+
+    /* Card & Button Surfaces */
+    .dark-surface-card {
+      background-color: #0D0D0F;
+      border: 1px solid #1C1C21;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
-    .iphone-bezel {
-      width: 100%;
-      height: 100%;
-      border-radius: 44px;
-      padding: 9px;
-      background: #000000;
-      position: relative;
-      overflow: hidden;
-      box-shadow: inset 0 0 4px rgba(0,0,0,0.9);
+    .dark-link-item {
+      background-color: #0D0D0F;
+      border: 1px solid #1C1C21;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .iphone-screen {
-      width: 100%;
-      height: 100%;
-      border-radius: 36px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      position: relative;
-      scrollbar-width: none;
+    .dark-link-item:hover {
+      background-color: #141418;
+      border-color: #2E2E36;
+      transform: translateY(-1px);
     }
-    .iphone-screen::-webkit-scrollbar {
-      display: none;
+    .dark-link-item:active {
+      transform: scale(0.985);
     }
-    /* Dynamic Island */
-    .dynamic-island {
-      width: 104px;
-      height: 29px;
-      background: #000000;
-      border-radius: 999px;
-      margin: 10px auto 0;
-      position: sticky;
-      top: 10px;
-      z-index: 30;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding-right: 9px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.04);
-    }
-    .dynamic-island-lens {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 35% 35%, #25335a 0%, #0d111d 60%, #050508 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    /* Smooth accordion transition */
-    .accordion-content {
-      transition: max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    }
-    /* Subtle card sheen */
-    .dark-card-surface {
-      background-color: #0E0E10;
-      border: 1px solid #1C1C20;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
-    }
-    .light-card-surface {
+
+    .light-surface-card {
       background-color: #FFFFFF;
-      border: 1px solid #EFEFF4;
-      box-shadow: 0 4px 24px -4px rgba(0, 0, 0, 0.035), 0 1px 3px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ECECEF;
+      box-shadow: 0 8px 26px -4px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+    .light-link-item {
+      background-color: #FFFFFF;
+      border: 1px solid #ECECEF;
+      box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.03);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .light-link-item:hover {
+      background-color: #FAFAFC;
+      border-color: #DCDCE2;
+      transform: translateY(-1px);
+    }
+    .light-link-item:active {
+      transform: scale(0.985);
+    }
+
+    /* Double-ringed Logo Box */
+    .logo-emblem-dark {
+      background: #050507;
+      border: 1.5px solid #2D2D35;
+      box-shadow: 0 0 0 3px #050507, 0 0 0 4.5px #222228;
+    }
+    .logo-emblem-light {
+      background: #09090B;
+      border: 1.5px solid #FFFFFF;
+      box-shadow: 0 0 0 2.5px #09090B, 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.92); }
+    }
+    .status-dot {
+      animation: pulse-dot 2.2s infinite ease-in-out;
     }
   </style>
 </head>
-<body class="min-h-screen transition-colors duration-300 selection:bg-neutral-500 selection:text-white">
 
-  <!-- TOP FLOATING CONTROLLER BAR (Allows previewing SWE Mode vs Exact VaveLabs Clone & Single vs Dual Phone View) -->
-  <header class="fixed top-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none">
-    <div class="pointer-events-auto flex flex-wrap items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 rounded-full bg-neutral-900/90 dark:bg-neutral-900/90 backdrop-blur-md border border-white/10 text-white shadow-2xl text-xs">
-      
-      <!-- Profile Content Switcher -->
-      <div class="flex items-center bg-black/50 p-0.5 rounded-full border border-white/5">
-        <button id="btnModeSWE" onclick="setProfileMode('swe')" class="px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm flex items-center gap-1.5">
-          <span>💾</span>
-          <span>GH Universe SWE</span>
-        </button>
-        <button id="btnModeClone" onclick="setProfileMode('vavelabs')" class="px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white">
-          VaveLabs Clone
-        </button>
-      </div>
+<body class="theme-dark min-h-screen text-white selection:bg-emerald-500 selection:text-black">
 
-      <div class="h-3.5 w-[1px] bg-white/15 hidden sm:block"></div>
-
-      <!-- Layout View Switcher (Mobile Single Page vs Reference Side-by-Side Mockup) -->
-      <div class="hidden md:flex items-center bg-black/50 p-0.5 rounded-full border border-white/5">
-        <button id="btnLayoutSingle" onclick="setLayoutMode('single')" class="px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white">
-          Live Web View
-        </button>
-        <button id="btnLayoutDual" onclick="setLayoutMode('dual')" class="px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm">
-          Dual Phone Mockup
-        </button>
-      </div>
-
-      <!-- Theme Switcher (Active when in Single Web View) -->
-      <button id="btnThemeToggle" onclick="toggleSingleTheme()" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/15 text-neutral-200 transition-all flex items-center gap-1.5 font-medium" title="Switch Dark / Light Theme">
-        <span id="themeToggleIcon">🌙</span>
-        <span id="themeToggleText" class="hidden sm:inline">Dark</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- MAIN CONTAINER -->
-  <main id="appViewport" class="min-h-screen w-full flex flex-col items-center justify-center">
-    <!-- Rendered dynamically by JS for instant toggling between Single Live View and Dual Phone Mockup -->
+  <!-- SINGLE RESPONSIVE CONTAINER (Works on both Mobile & Desktop) -->
+  <main class="w-full min-h-screen flex flex-col items-center justify-center px-4 py-8 sm:py-14">
+    <div id="profile-container" class="w-full max-w-[400px] sm:max-w-[430px] mx-auto my-auto"></div>
   </main>
 
-  <!-- INTERACTIVE RESUME / CV MODAL -->
-  <div id="resumeModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm opacity-0 transition-opacity duration-200">
-    <div class="w-full max-w-lg rounded-3xl bg-[#0E0E10] border border-[#232329] text-white p-5 sm:p-6 shadow-2xl transform scale-95 transition-transform duration-200 max-h-[88vh] overflow-y-auto" id="resumeModalCard">
-      <div class="flex items-center justify-between pb-4 border-b border-white/10">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-black border border-white/15 flex items-center justify-center font-bold text-sm tracking-tighter">
-            VL
-          </div>
-          <div>
-            <h3 class="font-bold text-base text-white">Software Engineering Resume</h3>
-            <p class="text-xs text-neutral-400 font-mono">1.44MB_FLOPPY_BUILD • GITHUB UNIVERSE '26</p>
-          </div>
+  <!-- RESUME / QUICK PITCH MODAL -->
+  <div id="resume-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="w-full max-w-md rounded-[26px] bg-[#0D0D0F] border border-zinc-800 p-6 text-white shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-zinc-800/80">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <h3 class="font-bold text-sm tracking-tight font-mono uppercase text-zinc-200">SWE_Resume_2026.pdf</h3>
         </div>
-        <button onclick="closeModal('resumeModal')" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition">
+        <button onclick="closeResumeModal()" class="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white">
           ✕
         </button>
       </div>
 
-      <!-- Quick Recruiter TL;DR -->
-      <div class="mt-4 space-y-4 text-xs sm:text-sm">
-        <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <span class="text-[11px] uppercase tracking-wider text-emerald-400 font-mono font-semibold block">● Seeking SWE Roles</span>
-            <p class="text-neutral-200 font-medium mt-0.5">B.S. in Computer Science • GPA: 3.70</p>
-          </div>
-          <button onclick="downloadVCard()" class="px-3 py-1.5 rounded-xl bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition">
-            + Save Contact (.vcf)
-          </button>
+      <div class="py-4 space-y-4 text-xs leading-relaxed text-zinc-300 max-h-[65vh] overflow-y-auto pr-1">
+        <div class="p-3.5 rounded-2xl bg-zinc-900/70 border border-zinc-800/90">
+          <div class="text-[11px] font-mono uppercase text-emerald-400 mb-1">Education & Honours</div>
+          <div class="font-semibold text-white text-sm">B.S. in Computer Science at Oakland University (Honors College)</div>
+          <div class="text-zinc-400">Expected Graduation: 2027 • GPA: 3.7</div>
+          <div class="text-zinc-400 mt-1"> D1 Collegiate Esports • Athlete President Mathematical Student Society </div>
         </div>
 
-        <!-- Core Stack Pills -->
-        <div>
-          <h4 class="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-2">Technical Stack</h4>
+        <div class="space-y-2.5">
+          <div class="text-[11px] font-mono uppercase text-zinc-400">Core Technical Stack</div>
           <div class="flex flex-wrap gap-1.5">
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">Java</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">Python</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">TypeScript / JS</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">React & React Native</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">Node.js / Express</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">SQL</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">AWS Textract</span>
-            <span class="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-neutral-200 text-xs">Linux / Git</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">Python</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">Java</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">TypeScript / Next.js</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">React Native</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">Node.js / Express</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">C</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">SSMS / SQL</span>
+            <span class="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-200 font-mono text-[11px]">ML</span>
           </div>
         </div>
 
-        <!-- Highlighted Engineering Builds -->
-        <div>
-          <h4 class="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-2">Selected Engineering Projects</h4>
-          <div class="space-y-2.5">
-            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <div class="flex justify-between items-center">
-                <span class="font-semibold text-white">Scam Scanner (Mobile AI Detector)</span>
-                <span class="text-[11px] font-mono text-neutral-400">React Native • AWS</span>
-              </div>
-              <p class="text-xs text-neutral-400 mt-1">OCR & LLM-powered phishing and scam analyzer using AWS Textract and Node.js REST APIs to parse suspicious screenshots in real time.</p>
-            </div>
-            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <div class="flex justify-between items-center">
-                <span class="font-semibold text-white">Lock N Dip (Encrypted Socket Chat)</span>
-                <span class="text-[11px] font-mono text-neutral-400">Java • JavaFX • TCP</span>
-              </div>
-              <p class="text-xs text-neutral-400 mt-1">Multi-threaded client-server chat system engineered with raw Java sockets, custom encryption handshakes, and real-time room state sync.</p>
-            </div>
-            <div class="p-3 rounded-xl bg-white/[0.02] border border-white/5">
-              <div class="flex justify-between items-center">
-                <span class="font-semibold text-white">Basketball Buddies (Matchmaking Engine)</span>
-                <span class="text-[11px] font-mono text-neutral-400">React • Node.js • SQL</span>
-              </div>
-              <p class="text-xs text-neutral-400 mt-1">Full-stack court finder & competitive ELO skill-ranking platform with relational SQL schema and real-time lobby creation.</p>
-            </div>
+        <div class="space-y-2">
+          <div class="text-[11px] font-mono uppercase text-zinc-400">Selected Engineering Highlights</div>
+          <div class="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60">
+            <div class="font-semibold text-white">VetNav — Grizzhacks Hackathon Winner</div>
+            <p class="text-zinc-400 mt-0.5">Built a web app that guides veterans through the confusing process of discovering and accessing their earned benefits. Won the "Social Good" track at Grizzhacks 8</p>
+          </div>
+          <div class="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60">
+            <div class="font-semibold text-white">PandaSort —  Natural Language Processing Model </div>
+            <p class="text-zinc-400 mt-0.5">Engineered an NLP model to streamline bulk contact imports to canonical database fields. Increased accuracy from 14% to 94%.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-zinc-900/40 border border-zinc-800/60">
+            <div class="font-semibold text-white">Basketball Buddies — Basketball Matchingmaking App</div>
+            <p class="text-zinc-400 mt-0.5">Collaborated with a team of 5 engineers to develop a mobile app that allows users to find matches with players around their area.</p>
           </div>
         </div>
-
-        <!-- Leadership & Background -->
-        <div>
-          <h4 class="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-1.5">Leadership & Honors</h4>
-          <ul class="text-xs text-neutral-300 space-y-1 list-disc list-inside">
-            <li>Vice President, University Mathematical Society</li>
-            <li>Honors College Scholar & Division 1 Collegiate Esports Athlete</li>
-            <li>Hands-on ML implementations (Decision Trees & Gradient Descent from scratch)</li>
-          </ul>
-        </div>
       </div>
 
-      <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-end gap-2">
-        <button onclick="closeModal('resumeModal')" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-neutral-300 transition">
-          Close
-        </button>
-        <button onclick="triggerResumeDownload()" class="px-4 py-2 rounded-xl bg-white text-black hover:bg-neutral-200 text-xs font-semibold transition flex items-center gap-1.5">
-          <span>Download Full PDF</span>
-          <span>↗</span>
-        </button>
-      </div>
+      <div class="pt-4 border-t border-zinc-800/80 flex gap-2.5">
+  <!-- Native HTML download link styled as a button -->
+  <a 
+    href="/PabloAvilaResume_2026.pdf" 
+    download="PabloAvilaResume_2026.pdf" 
+    class="flex-1 py-2.5 px-4 rounded-xl bg-white text-black font-semibold text-xs text-center hover:bg-zinc-200 transition"
+  >
+    Download Resume
+  </a>
+
+  <button 
+    type="button" 
+    onclick="closeResumeModal()" 
+    class="py-2.5 px-4 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 font-medium text-xs hover:text-white transition"
+  >
+    Done
+  </button>
+</div>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-300">
-    <div class="px-4 py-2.5 rounded-full bg-neutral-900 text-white border border-white/15 shadow-2xl flex items-center gap-2 text-xs font-medium">
+  <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
+    <div class="px-4 py-2.5 rounded-full bg-zinc-900/95 text-white border border-zinc-700/80 shadow-xl flex items-center gap-2 text-xs font-medium backdrop-blur-md">
       <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-      <span id="toastMessage">Saved to clipboard!</span>
+      <span id="toast-text">Action completed</span>
     </div>
   </div>
 
   <script>
-    // ==========================================
-    // APPLICATION STATE & PROFILE DATA
-    // ==========================================
     const state = {
-      profileMode: 'swe', // 'swe' (GitHub Universe NFC Floppy) or 'vavelabs' (Exact Image Clone)
-      layoutMode: window.innerWidth >= 900 ? 'dual' : 'single', // 'dual' (2 iPhones side-by-side) or 'single' (Responsive mobile page)
-      singleTheme: 'dark', // 'dark' or 'light'
-      expandedProjects: false,
-      customName: 'Pablo Avila',
-      customHandle: '@pabloavila',
+      theme: 'dark', // 'dark' | 'light'
+      projectsExpanded: false,
+      toastTimer: null
     };
 
-    const profiles = {
-      swe: {
-        monogram: 'VL', // Matches the sleek geometric VL emblem from the screenshot, toggleable
-        badge: '💾 1.44MB NFC Floppy • GitHub Universe \'26',
-        name: 'Pablo Avila',
-        handle: '@pabloavila',
-        bio: 'Software Engineer building full-stack apps, AI tools, and low-level systems.',
-        footer: '© 2026 Pablo Avila. Tapped via 3D NFC Floppy.',
-        socials: [
-          { id: 'github', title: 'GitHub', action: () => showToast('Opening github.com/pabloavila...') },
-          { id: 'linkedin', title: 'LinkedIn', action: () => showToast('Opening LinkedIn profile...') },
-          { id: 'vcard', title: 'Save vCard (.vcf)', action: () => downloadVCard() },
-          { id: 'x', title: 'X / Twitter', action: () => showToast('Opening X profile...') }
-        ],
-        links: [
-          {
-            id: 'save-contact',
-            icon: 'vcard',
-            label: 'Save Contact (.vcf)',
-            sublabel: 'One-tap iOS / Android contact card',
-            badge: '1-TAP',
-            action: 'vcard'
-          },
-          {
-            id: 'github',
-            icon: 'github',
-            label: 'GitHub',
-            sublabel: 'Pinned repos, ML from scratch & systems code',
-            action: 'github'
-          },
-          {
-            id: 'resume',
-            icon: 'resume',
-            label: 'Resume / CV',
-            sublabel: 'B.S. CS • 3.70 GPA • Honors & Projects',
-            action: 'resume'
-          },
-          {
-            id: 'projects',
-            icon: 'projects',
-            label: 'Featured Builds',
-            sublabel: 'Scam Scanner AI • Lock N Dip • Basketball Buddies',
-            action: 'toggle-projects'
-          },
-          {
-            id: 'contact',
-            icon: 'contact',
-            label: 'Contact',
-            sublabel: 'Copy email or send a quick message',
-            action: 'copy-email'
-          }
-        ]
-      },
-      vavelabs: {
-        monogram: 'VL',
-        badge: null,
-        name: 'VaveLabs',
-        handle: '@vavelabs',
-        bio: 'Designing digital tools, UI kits, and web templates.',
-        footer: '© 2026 VaveLabs. All rights reserved.',
-        socials: [
-          { id: 'instagram', title: 'Instagram', action: () => showToast('Instagram @vavelabs') },
-          { id: 'youtube', title: 'YouTube', action: () => showToast('YouTube @vavelabs') },
-          { id: 'tiktok', title: 'TikTok', action: () => showToast('TikTok @vavelabs') },
-          { id: 'x', title: 'X', action: () => showToast('X @vavelabs') }
-        ],
-        links: [
-          { id: 'github', icon: 'github', label: 'GitHub', action: 'external' },
-          { id: 'playlist', icon: 'spotify', label: 'Playlist', action: 'external' },
-          { id: 'behance', icon: 'behance', label: 'Behance', action: 'external' },
-          { id: 'contact', icon: 'contact', label: 'Contact', action: 'copy-email' }
-        ]
-      }
+    const profileData = {
+      name: 'Pablo Avila',
+      handle: 'Current CS student & aspiring SWE',
+      bio: 'Building full-stack apps, custom ML models & encrypted systems from scratch.',
+      badge: 'GitHub Universe \'26',
+      footer: '© 2026 Pablo Avila. Connect icons created by IconBaandar - Flaticon',
+      socials: [
+        { label: 'GitHub', icon: 'github', url: 'https://github.com/Avien77' },
+        { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/pablo-avila77/' },
+        { label: 'Email', icon: 'mail', action: 'copyEmail' },
+      ],
+      links: [
+        {
+          title: 'GitHub',
+          subtitle: 'Pinned repos, custom ML & full-stack builds',
+          icon: 'github',
+          url: 'https://github.com/Avien77'
+        },
+        {
+          title: 'Resume',
+          subtitle: 'B.S. CS \'27 • 3.70 GPA • Aspiring SWE',
+          icon: 'doc',
+          action: 'openResume'
+        },
+        {
+          title: 'Featured Builds',
+          subtitle: 'VetNav • Natural Language Processing Model • Local Basketball Matchmaking App',
+          icon: 'code',
+          action: 'toggleProjects'
+        },
+      ],
+      projects: [
+        {
+          name: 'VetNav — GrizzHacks Hackathon Winner',
+          stack: 'Web App • Full-Stack • 1st Place Social Good',
+          desc: 'Built a web app that guides veterans through the confusing process of discovering and accessing their earned benefits. Won the "Social Good" track at GrizzHacks 8.'
+        },
+        {
+          name: 'Natural Language Processing Model —  United Wholesale Mortgage',
+          stack: 'Python • NLP • Automated Schema Matching',
+          desc: 'Engineered an NLP model to streamline bulk contact imports to canonical database fields. Increased accuracy from 14% to 94%.'
+        },
+        {
+          name: 'Basketball Buddies — Matchmaking App',
+          stack: 'React • Node.js • SQL',
+          desc: 'Collaborated with a team of 5 engineers to develop a mobile app that allows users to find matches with players around their area. Developed with the MERN techstack.'
+        }
+      ]
     };
 
-    // ==========================================
-    // CRISP SVG ICONS MATCHING REFERENCE IMAGE
-    // ==========================================
-    function getLogoSVG() {
-      // Exact geometric "VL" monogram with diagonal slash + L bar inside double-rounded square
-      return `
-        <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Left diagonal stroke of V -->
-          <path d="M17 19L29.5 45H23.2L10.8 19H17Z" fill="white"/>
-          <!-- Vertical + Horizontal stroke forming the shared V/L geometry -->
-          <path d="M31 19H37.2V39.5H51V45H31V19Z" fill="white"/>
-        </svg>
-      `;
+    function getIconSVG(name) {
+      const icons = {
+        github: `<svg class="w-[17px] h-[17px]" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+        linkedin: `<svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>`,
+        mail: `<svg class="w-[15px] h-[15px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+        x: `<svg class="w-[13px] h-[13px]" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+        contact: `<svg class="w-[16px] h-[16px]" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>`,
+        doc: `<svg class="w-[16px] h-[16px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>`,
+        code: `<svg class="w-[16px] h-[16px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+        external: `<svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>`
+      };
+      return icons[name] || icons.external;
     }
 
-    function getSocialIconSVG(id) {
-      switch (id) {
-        case 'instagram':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>`;
-        case 'youtube':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8.001a2.75 2.75 0 0 0-1.94-1.94C18.14 5.6 12 5.6 12 5.6s-6.14 0-7.86.46a2.75 2.75 0 0 0-1.94 1.94C1.74 9.72 1.74 12 1.74 12s0 2.28.46 3.999a2.75 2.75 0 0 0 1.94 1.94c1.72.46 7.86.46 7.86.46s6.14 0 7.86-.46a2.75 2.75 0 0 0 1.94-1.94c.46-1.72.46-4 .46-4s0-2.28-.46-3.999ZM9.95 15.02V8.98L15.2 12l-5.25 3.02Z"/></svg>`;
-        case 'tiktok':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/></svg>`;
-        case 'x':
-          return `<svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`;
-        case 'github':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>`;
-        case 'linkedin':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>`;
-        case 'vcard':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>`;
-        default:
-          return '';
-      }
-    }
+    function renderProfile() {
+      const isDark = state.theme === 'dark';
+      document.body.className = isDark 
+        ? 'theme-dark min-h-screen text-white selection:bg-emerald-500 selection:text-black' 
+        : 'theme-light min-h-screen text-[#09090B] selection:bg-emerald-500 selection:text-white';
 
-    function getRowIconSVG(iconType) {
-      switch (iconType) {
-        case 'github':
-          return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z"/></svg>`;
-        case 'spotify':
-          return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2Zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.434-5.305-1.76-8.786-.963-.335.077-.67-.133-.746-.469-.077-.335.132-.67.469-.746 3.809-.87 7.076-.496 9.713 1.115.293.18.386.563.207.856Zm1.224-2.722c-.226.367-.706.482-1.072.257-2.687-1.652-6.785-2.131-9.965-1.166-.413.127-.848-.106-.973-.517-.125-.413.108-.848.52-.973 3.632-1.102 8.147-.568 11.234 1.328.366.226.48.707.256 1.071Zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71c-.493.15-1.016-.129-1.166-.623-.148-.495.13-1.015.625-1.166 3.532-1.073 9.404-.866 13.115 1.337.445.264.59.838.327 1.282-.264.443-.838.59-1.283.327Z"/></svg>`;
-        case 'behance':
-          return `<span class="font-bold text-[11px] tracking-tighter leading-none">Bē</span>`;
-        case 'contact':
-          return `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>`;
-        case 'vcard':
-          return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
-        case 'resume':
-          return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
-        case 'projects':
-          return `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`;
-        default:
-          return '';
-      }
-    }
+      const cardClass = isDark ? 'dark-surface-card text-white' : 'light-surface-card text-[#09090B]';
+      const linkClass = isDark ? 'dark-link-item text-white' : 'light-link-item text-[#09090B]';
+      const handleColor = isDark ? 'text-zinc-400' : 'text-zinc-500';
+      const bioColor = isDark ? 'text-zinc-300' : 'text-zinc-600';
+      const socialBtnClass = isDark 
+        ? 'bg-zinc-900/90 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-600' 
+        : 'bg-zinc-100/90 border border-zinc-200/80 text-zinc-700 hover:text-black hover:border-zinc-300';
+      const linkIconWrapClass = isDark ? 'text-zinc-200' : 'text-zinc-800';
+      const extIconClass = isDark ? 'text-zinc-500 group-hover:text-zinc-300' : 'text-zinc-400 group-hover:text-zinc-700';
+      const subTextClass = isDark ? 'text-zinc-500' : 'text-zinc-400';
 
-    // Exact external link box icon on the right side of each card in the screenshot
-    function getExternalBoxIconSVG() {
-      return `
-        <svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          <polyline points="15 3 21 3 21 9"/>
-          <line x1="10" y1="14" x2="21" y2="3"/>
-        </svg>
-      `;
-    }
-
-    // ==========================================
-    // RENDER CARD SCREEN (Supports Dark or Light)
-    // ==========================================
-    function renderProfileScreenHTML(theme) {
-      const isDark = theme === 'dark';
-      const data = profiles[state.profileMode];
-
-      const bgClass = isDark ? 'bg-[#030303] text-white' : 'bg-[#F8F8FA] text-[#111111]';
-      const cardClass = isDark ? 'dark-card-surface' : 'light-card-surface';
-      const mutedText = isDark ? 'text-[#8A8A93]' : 'text-[#76767E]';
-      const bioText = isDark ? 'text-[#BCBCC4]' : 'text-[#52525B]';
-      const iconCircleClass = isDark
-        ? 'bg-[#16161A] border border-[#242429] text-white hover:bg-[#202026]'
-        : 'bg-[#F3F3F7] border border-[#E6E6EC] text-[#111111] hover:bg-[#E9E9F0]';
-      const rowCardClass = isDark
-        ? 'dark-card-surface hover:bg-[#141418] hover:border-[#2A2A30]'
-        : 'light-card-surface hover:bg-[#F4F4F8] hover:border-[#E2E2EA]';
-      const rowIconBoxClass = isDark
-        ? 'bg-[#16161A] border border-[#222227] text-white'
-        : 'bg-[#F3F3F6] border border-[#EAEAEF] text-[#111111]';
-
-      // Social buttons row
-      const socialsHTML = data.socials.map((s, idx) => `
-        <button 
-          onclick="handleSocialClick(${idx})"
-          title="${s.title}"
-          class="w-7 h-7 rounded-full flex items-center justify-center transition-all duration-150 active:scale-90 ${iconCircleClass}">
-          ${getSocialIconSVG(s.id)}
-        </button>
-      `).join('');
-
-      // Optional NFC Floppy Status Pill (Only in SWE Mode)
-      const floppyBadgeHTML = data.badge ? `
-        <div class="mb-3 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono tracking-tight ${
-          isDark ? 'bg-white/[0.05] text-neutral-300 border border-white/10' : 'bg-black/[0.04] text-neutral-600 border border-black/10'
-        }">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>${data.badge}</span>
-        </div>
-      ` : '';
-
-      // Link Rows
-      const linksHTML = data.links.map((item) => {
-        const isProjectsRow = item.action === 'toggle-projects';
-        const showAccordion = isProjectsRow && state.expandedProjects;
-
+      const socialsHTML = profileData.socials.map(soc => {
+        const clickHandler = soc.action 
+          ? `onclick="handleAction('${soc.action}')"` 
+          : `onclick="window.open('${soc.url}', '_blank')"`;
         return `
-          <div class="w-full">
-            <button
-              onclick="handleLinkAction('${item.action}', '${item.label}')"
-              class="group w-full rounded-[18px] px-3.5 py-3 flex items-center justify-between transition-all duration-150 active:scale-[0.99] ${rowCardClass}">
-              <div class="flex items-center gap-3 min-w-0 text-left">
-                <div class="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${rowIconBoxClass}">
-                  ${getRowIconSVG(item.icon)}
-                </div>
-                <div class="truncate">
-                  <div class="flex items-center gap-2">
-                    <span class="text-[12.5px] font-semibold tracking-[-0.01em] ${isDark ? 'text-white' : 'text-[#111111]'}">${item.label}</span>
-                    ${item.badge ? `<span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 font-semibold">${item.badge}</span>` : ''}
-                  </div>
-                  ${item.sublabel ? `<p class="text-[10.5px] truncate ${mutedText}">${item.sublabel}</p>` : ''}
-                </div>
-              </div>
-              <div class="pl-2 flex-shrink-0 ${isDark ? 'text-neutral-400' : 'text-neutral-500'}">
-                ${getExternalBoxIconSVG()}
-              </div>
-            </button>
-
-            ${isProjectsRow ? `
-              <div class="overflow-hidden transition-all duration-300 ${showAccordion ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'}">
-                <div class="rounded-[18px] p-3 space-y-2 ${isDark ? 'bg-[#0B0B0D] border border-[#1E1E24]' : 'bg-white border border-[#E6E6EE]'}">
-                  <div class="p-2.5 rounded-xl ${isDark ? 'bg-white/[0.03] hover:bg-white/[0.06]' : 'bg-black/[0.02] hover:bg-black/[0.05]'} transition cursor-pointer" onclick="openModal('resumeModal')">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11.5px] font-semibold">Scam Scanner AI</span>
-                      <span class="text-[9.5px] font-mono ${mutedText}">React Native • AWS</span>
-                    </div>
-                    <p class="text-[10.5px] ${mutedText} mt-0.5">Real-time phishing & OCR text analyzer powered by AWS Textract.</p>
-                  </div>
-                  <div class="p-2.5 rounded-xl ${isDark ? 'bg-white/[0.03] hover:bg-white/[0.06]' : 'bg-black/[0.02] hover:bg-black/[0.05]'} transition cursor-pointer" onclick="openModal('resumeModal')">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11.5px] font-semibold">Lock N Dip</span>
-                      <span class="text-[9.5px] font-mono ${mutedText}">Java • Sockets</span>
-                    </div>
-                    <p class="text-[10.5px] ${mutedText} mt-0.5">Multi-threaded encrypted TCP chat server & JavaFX desktop client.</p>
-                  </div>
-                  <div class="p-2.5 rounded-xl ${isDark ? 'bg-white/[0.03] hover:bg-white/[0.06]' : 'bg-black/[0.02] hover:bg-black/[0.05]'} transition cursor-pointer" onclick="openModal('resumeModal')">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[11.5px] font-semibold">Basketball Buddies</span>
-                      <span class="text-[9.5px] font-mono ${mutedText}">React • Node • SQL</span>
-                    </div>
-                    <p class="text-[10.5px] ${mutedText} mt-0.5">Full-stack pickup matchmaking & competitive skill rating platform.</p>
-                  </div>
-                </div>
-              </div>
-            ` : ''}
-          </div>
+          <button ${clickHandler} title="${soc.label}" class="w-8 h-8 rounded-full flex items-center justify-center transition transform active:scale-90 ${socialBtnClass}">
+            ${getIconSVG(soc.icon)}
+          </button>
         `;
       }).join('');
 
-      return `
-        <div class="w-full min-h-full px-4 pt-6 pb-8 flex flex-col justify-between select-none ${bgClass}">
-          <div class="w-full max-w-[360px] mx-auto space-y-2.5">
-            
-            <!-- TOP PROFILE CARD (Matches exact rounded container in reference image) -->
-            <div class="w-full rounded-[26px] px-5 pt-6 pb-5 text-center flex flex-col items-center ${cardClass}">
-              
-              ${floppyBadgeHTML}
+      const linksHTML = profileData.links.map(item => {
+        const clickAttr = item.action 
+          ? `onclick="handleAction('${item.action}')"` 
+          : `onclick="window.open('${item.url}', '_blank')"`;
 
-              <!-- Iconic Double-Border Monogram Badge -->
-              <div class="w-[62px] h-[62px] rounded-[16px] p-[3px] ${
-                isDark 
-                  ? 'bg-[#09090B] border border-[#27272D] shadow-lg' 
-                  : 'bg-white border border-[#DCDCE2] shadow-sm'
-              } flex items-center justify-center mb-3.5">
-                <div class="w-full h-full rounded-[12px] bg-[#08080A] border border-white/15 flex items-center justify-center">
-                  ${getLogoSVG()}
+        const pillHTML = item.badge ? `
+          <span class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded ${
+            isDark ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+          }">${item.badge}</span>
+        ` : '';
+
+        return `
+          <button ${clickAttr} class="group w-full rounded-[18px] px-4 py-3.5 flex items-center justify-between text-left ${linkClass}">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <div class="w-6 h-6 flex items-center justify-center shrink-0 ${linkIconWrapClass}">
+                ${getIconSVG(item.icon)}
+              </div>
+              <div class="truncate">
+                <div class="flex items-center gap-2">
+                  <span class="text-[13.5px] font-semibold tracking-[-0.01em]">${item.title}</span>
+                  ${pillHTML}
                 </div>
-              </div>
-
-              <!-- Title -->
-              <h1 class="text-[19px] font-bold tracking-[-0.02em] leading-snug ${isDark ? 'text-white' : 'text-[#0D0D0F]'}">
-                ${data.name}
-              </h1>
-
-              <!-- Handle -->
-              <p class="text-[11.5px] ${mutedText} mt-0.5 font-normal">
-                ${data.handle}
-              </p>
-
-              <!-- 1-Line Bio -->
-              <p class="text-[11.5px] leading-[1.45] ${bioText} max-w-[245px] mt-2.5 font-normal">
-                ${data.bio}
-              </p>
-
-              <!-- 4 Circular Social Icon Pills -->
-              <div class="flex items-center justify-center gap-2.5 mt-4">
-                ${socialsHTML}
+                ${item.subtitle ? `<p class="text-[11px] truncate mt-0.5 ${subTextClass}">${item.subtitle}</p>` : ''}
               </div>
             </div>
-
-            <!-- STACKED FULL-WIDTH LINK BARS -->
-            <div class="space-y-2.5 pt-0.5">
-              ${linksHTML}
+            <div class="shrink-0 ml-2 transition-transform group-hover:translate-x-0.5 ${extIconClass}">
+              ${getIconSVG('external')}
             </div>
+          </button>
+        `;
+      }).join('');
 
-            <!-- FOOTER COPYRIGHT -->
-            <div class="pt-4 pb-2 text-center">
-              <p class="text-[10.5px] ${mutedText}">
-                ${data.footer}
-              </p>
-            </div>
-
+      const projectsDrawerHTML = state.projectsExpanded ? `
+        <div class="rounded-[18px] p-4 space-y-2.5 transition-all ${cardClass}">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-[10px] font-mono uppercase tracking-wider ${handleColor}">Featured SWE Projects</span>
+            <button onclick="handleAction('toggleProjects')" class="text-[10px] font-mono underline ${handleColor}">Hide</button>
           </div>
+          ${profileData.projects.map(p => `
+            <div class="p-3 rounded-xl border ${isDark ? 'bg-zinc-950/80 border-zinc-800/80' : 'bg-zinc-50 border-zinc-200/70'}">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-semibold">${p.name}</span>
+              </div>
+              <div class="text-[10px] font-mono mt-0.5 ${isDark ? 'text-emerald-400' : 'text-emerald-700'}">${p.stack}</div>
+              <p class="text-[11px] mt-1 leading-snug ${bioColor}">${p.desc}</p>
+            </div>
+          `).join('')}
+        </div>
+      ` : '';
+
+      document.getElementById('profile-container').innerHTML = `
+        <div class="flex flex-col space-y-3">
+          
+          <!-- TOP PROFILE CARD -->
+          <section class="relative rounded-[26px] px-6 pt-8 pb-6 flex flex-col items-center text-center ${cardClass}">
+            
+            <!-- Subtle Corner Theme Toggle -->
+            <button onclick="toggleTheme()" title="Switch Theme" class="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center text-xs transition ${socialBtnClass}">
+              ${isDark ? '☀️' : '🌙'}
+            </button>
+
+            <!-- NFC Status Badge -->
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono mb-3.5 ${
+              isDark ? 'bg-zinc-900/90 border border-zinc-800 text-emerald-400' : 'bg-zinc-100 border border-zinc-200 text-emerald-700'
+            }">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 status-dot"></span>
+              <span>${profileData.badge}</span>
+            </div>
+
+            <!-- Monogram Emblem -->
+            <div class="w-[64px] h-[64px] rounded-[16px] flex items-center justify-center mb-4 select-none ${isDark ? 'logo-emblem-dark' : 'logo-emblem-light'}">
+              <!-- <svg class="w-9 h-9 text-white" viewBox="0 0 40 40" fill="none">
+                <path d="M9.5 11L18.2 29H21.8L13.1 11H9.5Z" fill="currentColor"/>
+                <path d="M22.2 11V29H31.5V25.6H25.8V11H22.2Z" fill="currentColor"/>
+              </svg>
+              -->
+              <img src = "pabloheadshot.jpeg" alt = "PabloHeadshot" img>
+            </div>
+
+            <h1 class="text-[20px] font-bold tracking-[-0.02em] leading-tight">
+              ${profileData.name}
+            </h1>
+
+            <p class="text-[12px] font-medium mt-1 ${handleColor}">
+              ${profileData.handle}
+            </p>
+
+            <p class="text-[12px] leading-[1.5] max-w-[260px] mt-3.5 ${bioColor}">
+              ${profileData.bio}
+            </p>
+
+            <div class="flex items-center justify-center gap-2.5 mt-5">
+              ${socialsHTML}
+            </div>
+          </section>
+
+          <!-- STACKED LINK BUTTONS -->
+          <section class="flex flex-col space-y-2.5">
+            ${linksHTML}
+            ${projectsDrawerHTML}
+          </section>
+
+          <!-- FOOTER -->
+          <footer class="pt-5 pb-2 text-center">
+            <p class="text-[10.5px] tracking-tight ${isDark ? 'text-zinc-500' : 'text-zinc-400'}">
+              ${profileData.footer}
+            </p>
+          </footer>
+
         </div>
       `;
     }
 
-    // ==========================================
-    // MAIN VIEWPORT RENDERER
-    // ==========================================
-    function renderApp() {
-      const viewport = document.getElementById('appViewport');
-      const btnModeSWE = document.getElementById('btnModeSWE');
-      const btnModeClone = document.getElementById('btnModeClone');
-      const btnLayoutSingle = document.getElementById('btnLayoutSingle');
-      const btnLayoutDual = document.getElementById('btnLayoutDual');
-      const btnThemeToggle = document.getElementById('btnThemeToggle');
+    function toggleTheme() {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      renderProfile();
+    }
 
-      // Update active pill styles
-      if (state.profileMode === 'swe') {
-        btnModeSWE.className = 'px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm flex items-center gap-1.5';
-        btnModeClone.className = 'px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white';
-      } else {
-        btnModeClone.className = 'px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm';
-        btnModeSWE.className = 'px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white flex items-center gap-1.5';
-      }
-
-      if (state.layoutMode === 'dual') {
-        btnLayoutDual.className = 'px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm';
-        btnLayoutSingle.className = 'px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white';
-        btnThemeToggle.classList.add('hidden');
-      } else {
-        btnLayoutSingle.className = 'px-2.5 py-1 rounded-full font-medium transition-all bg-white text-black shadow-sm';
-        btnLayoutDual.className = 'px-2.5 py-1 rounded-full font-medium transition-all text-neutral-400 hover:text-white';
-        btnThemeToggle.classList.remove('hidden');
-      }
-
-      // Update theme button label
-      document.getElementById('themeToggleIcon').textContent = state.singleTheme === 'dark' ? '🌙' : '☀️';
-      document.getElementById('themeToggleText').textContent = state.singleTheme === 'dark' ? 'Dark' : 'Light';
-
-      if (state.layoutMode === 'dual') {
-        // Render Side-by-Side Dark & Light iPhones on Cosmic Gradient Backdrop (Matching Reference Image)
-        document.body.className = 'min-h-screen cosmic-backdrop cosmic-stars flex items-center justify-center';
-        viewport.innerHTML = `
-          <div class="w-full max-w-6xl mx-auto px-4 pt-20 pb-12 flex flex-col lg:flex-row items-center justify-center gap-10 xl:gap-16">
-            
-            <!-- LEFT PHONE: DARK MODE -->
-            <div class="iphone-frame">
-              <div class="iphone-bezel">
-                <div class="iphone-screen bg-[#030303]">
-                  <div class="dynamic-island">
-                    <div class="dynamic-island-lens"></div>
-                  </div>
-                  ${renderProfileScreenHTML('dark')}
-                </div>
-              </div>
-            </div>
-
-            <!-- RIGHT PHONE: LIGHT MODE -->
-            <div class="iphone-frame">
-              <div class="iphone-bezel">
-                <div class="iphone-screen bg-[#F8F8FA]">
-                  <div class="dynamic-island">
-                    <div class="dynamic-island-lens"></div>
-                  </div>
-                  ${renderProfileScreenHTML('light')}
-                </div>
-              </div>
-            </div>
-
-          </div>
-        `;
-      } else {
-        // Render Clean Responsive Single Mobile-First Website
-        const isDark = state.singleTheme === 'dark';
-        document.body.className = `min-h-screen transition-colors duration-300 ${isDark ? 'bg-[#030303] text-white' : 'bg-[#F8F8FA] text-[#111111]'}`;
-        viewport.innerHTML = `
-          <div class="w-full max-w-[420px] mx-auto pt-14 pb-8 min-h-screen flex flex-col justify-center">
-            ${renderProfileScreenHTML(state.singleTheme)}
-          </div>
-        `;
+    function handleAction(actionName) {
+      if (actionName === 'downloadVCF') {
+        downloadVCF();
+      } else if (actionName === 'openResume') {
+        openResumeModal();
+      } else if (actionName === 'toggleProjects') {
+        state.projectsExpanded = !state.projectsExpanded;
+        renderProfile();
+      } else if (actionName === 'copyEmail') {
+        navigator.clipboard?.writeText('pabloavila77@outlook.com');
+        showToast('Copied email to clipboard!');
       }
     }
 
-    // ==========================================
-    // INTERACTIVE HANDLERS (vCard, Modals, Copy)
-    // ==========================================
-    function setProfileMode(mode) {
-      state.profileMode = mode;
-      renderApp();
-    }
-
-    function setLayoutMode(mode) {
-      state.layoutMode = mode;
-      renderApp();
-    }
-
-    function toggleSingleTheme() {
-      state.singleTheme = state.singleTheme === 'dark' ? 'light' : 'dark';
-      renderApp();
-    }
-
-    function handleSocialClick(index) {
-      const social = profiles[state.profileMode].socials[index];
-      if (social && social.action) social.action();
-    }
-
-    function handleLinkAction(action, label) {
-      if (action === 'vcard') {
-        downloadVCard();
-      } else if (action === 'resume') {
-        openModal('resumeModal');
-      } else if (action === 'toggle-projects') {
-        state.expandedProjects = !state.expandedProjects;
-        renderApp();
-      } else if (action === 'copy-email') {
-        copyToClipboard('pabloavila77@outlook.com');
-        showToast('Copied email: pabloavila77@outlook.com');
-      } else if (action === 'github') {
-        showToast('Opening GitHub profile...');
-      } else {
-        showToast(`Opening ${label}...`);
-      }
-    }
-
-    // Generate & download a real .vcf Contact Card for recruiters
-    function downloadVCard() {
-      const vcardContent = [
+    function downloadVCF() {
+      const vcard = [
         'BEGIN:VCARD',
         'VERSION:3.0',
         'N:Avila;Pablo;;;',
-        'FN:Pablo Avila (Aspiring Software Engineer)',
-        'TITLE:Aspiring Software Engineer',
-        'EMAIL;TYPE=INTERNET,PREF:pabloavila77@outlook.com',
-        'URL:https://github.com/Avien77',
-        'NOTE:Met at GitHub Universe 2026 via 3D-Printed NFC Floppy Disk! B.S. CS (3.70 GPA) creating full-stack, AI, and Java/Python applications.',
+        'FN:Pablo Avila (Aspiring SWE)',
+        'TITLE:Software Engineer • B.S. Computer Science',
+        'EMAIL;TYPE=INTERNET:pabloavila77@outlook.com',
+        'URL:https://github.com',
+        'NOTE:Met at GitHub Universe 2026!',
         'END:VCARD'
       ].join('\r\n');
 
-      const blob = new Blob([vcardContent], { type: 'text/vcard;charset=utf-8;' });
+      const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Pablo_Avila_GitHub_Universe.vcf';
+      a.download = 'Pablo_Avila_SWE_GitHub_Universe.vcf';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -736,67 +453,34 @@
       showToast('Downloaded Contact Card (.vcf)');
     }
 
-    function triggerResumeDownload() {
-      showToast('Downloading Pablo_Avila_SWE_Resume.pdf...');
-      setTimeout(() => closeModal('resumeModal'), 800);
-    }
-
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      const card = document.getElementById(id + 'Card');
+    function openResumeModal() {
+      const modal = document.getElementById('resume-modal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      requestAnimationFrame(() => {
-        modal.classList.remove('opacity-0');
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
-      });
     }
 
-    function closeModal(id) {
-      const modal = document.getElementById(id);
-      const card = document.getElementById(id + 'Card');
-      modal.classList.add('opacity-0');
-      card.classList.remove('scale-100');
-      card.classList.add('scale-95');
-      setTimeout(() => {
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');
-      }, 200);
+    function closeResumeModal() {
+      const modal = document.getElementById('resume-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
 
-    function copyToClipboard(text) {
-      const tempInput = document.createElement('textarea');
-      tempInput.value = text;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-    }
-
-    let toastTimeout;
     function showToast(msg) {
       const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toastMessage');
-      toastMessage.textContent = msg;
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
       toast.classList.remove('opacity-0', 'translate-y-2');
       toast.classList.add('opacity-100', 'translate-y-0');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
+
+      clearTimeout(state.toastTimer);
+      state.toastTimer = setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
         toast.classList.remove('opacity-100', 'translate-y-0');
       }, 2400);
     }
 
-    // Close modal when clicking backdrop
-    document.getElementById('resumeModal').addEventListener('click', (e) => {
-      if (e.target.id === 'resumeModal') closeModal('resumeModal');
-    });
-
-    // Initialize on load
-    window.onload = function () {
-      renderApp();
-    };
+    renderProfile();
   </script>
 </body>
 </html>
+
